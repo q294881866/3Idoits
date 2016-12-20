@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		                    http://www.springframework.org/schema/context 
+		                    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		                    http://www.springframework.org/schema/tx 
+		                    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		                    http://www.springframework.org/schema/aop 
+		                    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"> 
+
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 人才市场模块 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- service beans configure -->
+	<bean id="userService" class="org.jiumao.talentMarket.service.UserServiceImpl"></bean>
+	
+	<!-- database beans configure -->
+	<bean id="userDao" class="org.jiumao.talentMarket.dao.UserDaoImpl" ></bean>
+	
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ redis集群链接问题 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+	<bean id = "shardedJedisPool" class = "redis.clients.jedis.ShardedJedisPool">
+    <constructor-arg index="0" ref="jedisPoolConfig"/>
+    <constructor-arg index="1">
+      <list>
+        <bean class="redis.clients.jedis.JedisShardInfo">
+          <constructor-arg index="0" value="${redis.host}"/>	   
+          <constructor-arg index="1" value="${redis.port}" type="int"/>
+          <constructor-arg index="2" value="${redis.timeout}" type="int"/>
+          <property name="password" value="${redis.password}"/>
+        </bean>
+        <bean class="redis.clients.jedis.JedisShardInfo">
+          <constructor-arg index="0" value="${redis.host2}"/>	   
+          <constructor-arg index="1" value="${redis.port}" type="int"/>
+          <constructor-arg index="2" value="${redis.timeout}" type="int"/>
+          <property name="password" value="${redis.password}"/>
+        </bean>
+      </list>			
+    </constructor-arg>
+  </bean>-->
+	
+  <!-- 导入相关配置 
+	<import resource="classpath:activiti-context.xml"/>-->
+	
+	
+</beans>                    

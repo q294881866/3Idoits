@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="style/js/jquery.js"></script>
+	<script type="text/javascript">
+	function get() {
+		var url = "http://127.0.0.1:8080/homework/admin";
+		var number = $("#number").val();
+		if(number==""){
+			alert("'所属公司'不能为空!");
+			$("#number").focus();
+			return;
+		}
+		$.ajax({
+            type: 'get',
+			url:url,
+			async: true,
+			dataType:"jsonp",/*加上datatype*/
+			jsonpCallback:"result",/*设置一个回调函数，名字随便取，和下面的函数里的名字相同就行*/
+			
+			success:function(data) {
+			num=data;alert(data);
+			  var content = JSON.stringify(data);
+			  $("#myDiv").html(content);
+			},
+			error:function(data) {
+			num=data;alert("error"+data);
+			  $("#myDiv").html(data);
+			}
+		});
+	}
+
+    function post() {
+     var url = "admin";
+    
+     $('form').submit(function(){ 
+         $.ajax({
+             type: "POST",
+             url: url,
+             data: $('#formLogin').serialize(),
+             async: false,
+             error: function(request) {	alert("Defeat! Check the network and Try Agin!");    },
+     	    success: function(data) {   	     
+ 				suc(data);
+     	     }
+         });
+	 	})
+	 	
+	     $("#button").click(function () {
+	          var username = $("#userName").val();
+	          var userpwd = $("#password").val();
+	          if (username.length < 0 && userpwd.length < 0) {
+	             alert("请填写用户名称和密码！");
+	          }
+	     }) 
+ 
+    }
+	
+	</script>
+</head>
+<body>
+
+<h1>注册页面</h1>
+<form  id= "formLogin" action="" method="post">
+<div id="myDiv"><h2>您好，尊敬的老师</h2></div>
+账号:<input id='userName' type='text' name="userName" ><br/>
+密码:<input id="password" type="password" name="password" value=""/>
+重复密码:<input id="" type="hidden" value=""/>
+性别: <input type="radio" name="sex" value="male" /> Male
+    <br />
+    <input type="radio" name="sex" value="female" /> Female<br>
+手机号：<input type="number" name="phone">
+E-mail: <input type="email" name="user_email" />
+<input type="submit" id="button" onclick="post()" value="ok"/>
+
+</form>
+
+</body>
+</html>
+

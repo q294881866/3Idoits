@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="style/js/jquery.js"></script>
+	<script type="text/javascript">
+	function isExist() {
+		var url = "http://127.0.0.1:8080/task/guessNum?callback=result&number="+number;
+		var number = $("#number").val();
+		if(number==""){
+			alert("'所属公司'不能为空!");
+			$("#number").focus();
+			return;
+		}
+		$.ajax({
+			url:url,
+			async: true,
+			dataType:"jsonp",/*加上datatype*/
+			jsonpCallback:"result",/*设置一个回调函数，名字随便取，和下面的函数里的名字相同就行*/
+			
+			success:function(data) {
+			num=data;alert(data);
+			  var content = JSON.stringify(data);
+			  $("#myDiv").html(content);
+			},
+			error:function(data) {
+			num=data;alert("error"+data);
+			  $("#myDiv").html(data);
+			}
+		});
+	}
+	
+	</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+猜一个数:<input id='number' type='text' name="number"><br/>
+   <input id="url" type="hidden" value=""/>
+<button type="button" onclick="isExist()">通过 AJAX 改变内容</button>
+
+</body>
+</html>
+
