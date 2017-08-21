@@ -14,24 +14,24 @@ public class PropertiesBeanFactory implements BeanFactory {
 	}	
 	
 	public PropertiesBeanFactory(String configurationFile){
-		//��ȡ�����ļ����õ�����DAO��ʵ������
+		
 		try {
 			Properties props = new Properties();
 			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(configurationFile));
 			
-			//��������ļ�����ʼ�����е�DAO����
+			
 			Set set = props.entrySet();
 			for (Iterator iterator = set.iterator(); iterator.hasNext();) {
 				Map.Entry entry = (Map.Entry) iterator.next();
-				String key = (String)entry.getKey(); //DAO�����
-				String className = (String)entry.getValue(); //ȫ·������
+				String key = (String)entry.getKey(); 
+				String className = (String)entry.getValue(); 
 				Class clz = Class.forName(className);
-				Object bean = clz.newInstance(); //Ԥ�ȴ����õ�DAO����
-				beans.put(key, bean); //����DAO����
+				Object bean = clz.newInstance(); 
+				beans.put(key, bean);
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
